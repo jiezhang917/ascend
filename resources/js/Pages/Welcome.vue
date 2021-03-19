@@ -54,7 +54,9 @@
         <!-- General business info -->
         <div v-if="step === 2">
             <general-info @go-prev="goPrev" @update:info="updateInfo"
-                :business-name="businessName" :business-desc="businessDesc" :business-category="businessCategory"/>
+                :business-name="businessName" :business-desc="businessDesc" :business-category="businessCategory">
+                <jet-input type="file" name="photos" accept="image/png, image/jpeg" @change="saveFiles"/>
+            </general-info>
         </div>
 
         <!-- Select a theme -->
@@ -139,6 +141,7 @@
 </style>
 
 <script>
+    import JetInput from '@/Jetstream/Input'
     import JetButton from '@/Jetstream/Button';
     import GeneralInfo from '../Components/GeneralInfo';
     import SelectTheme from '../Components/SelectTheme';
@@ -158,7 +161,8 @@
                 businessCategory: '',
                 theme: '',
                 donation: {},
-                inProgress: false
+                fileData: null,
+                inProgress: false,
             }
         },
         computed: {
@@ -167,6 +171,7 @@
             }
         },
         components: {
+            JetInput,
             JetButton,
             GeneralInfo,
             SelectTheme,
@@ -179,6 +184,18 @@
             },
             goNext() {
                 this.step++;
+            },
+            saveFiles($e) {
+                const fileList = $e.target.files;
+                const fieldName = $e.target.name;
+                if (!fileList.length) return;
+                const formData = new FormData();
+                Array
+                .from(Array(fileList.length).keys())
+                .map(x => {
+                    formData.append(fieldName, fileList[x], fileList[x].name);
+                });
+                this.fileData = formData;
             },
             updateInfo(data) {
                 this.businessName = data.name;
@@ -196,19 +213,28 @@
             },
             submit() {
                 this.inProgress = true;
-                axios.post('/api/store/create', {
-                    name: this.businessName,
-                    description: this.businessDesc,
-                    category: this.businessCategory,
-                    theme: this.theme,
-                    donations: this.donations,
-                    images: [],
+                axios.post('/api/files/upload', this.fileData, {
+                    headers: {
+                    'Content-Type': 'multipart/form-data'
+                    }
                 }).then((response) => {
-                    this.inProgress = false;
-                    window.location.href = response.data.url;
+                    const img = response.data.image;
+                    axios.post('/api/store/create', {
+                        name: this.businessName,
+                        description: this.businessDesc,
+                        category: this.businessCategory,
+                        theme: this.theme,
+                        donations: this.donations,
+                        images: [img],
+                    }).then((response) => {
+                        this.inProgress = false;
+                        window.location.href = response.data.url;
+                    }).catch(error => {
+                        this.inProgress = false;
+                        // todo: alert
+                    });
                 }).catch(error => {
                     this.inProgress = false;
-                    // todo: alert
                 });
             }
         }

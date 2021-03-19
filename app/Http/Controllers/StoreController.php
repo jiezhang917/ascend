@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
+    /**
+     * Create store
+     */
     public function Create(Request $request)
     {
         $user = new User([
@@ -36,10 +39,27 @@ class StoreController extends Controller
         ]);
     }
 
+    /**
+     * Get store info
+     */
     public function Get(Request $request, $name)
     {
         $store = Store::where('name', $name)->first();
         
         return Response()->json($store);
+    }
+
+    /**
+     * Upload store files
+     */
+    public function UploadFiles(Request $request)
+    {
+        $file = $request->file('photos');
+        $name = $file->getClientOriginalName();
+        $file->move(public_path() . '/images/stores/', $name);
+        
+        return response()->json([
+            'image' => $name
+        ]);
     }
 }

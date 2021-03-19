@@ -1,8 +1,13 @@
 <template>
     <div>
-        <div class="h-32 border flex justify-center items-center">
-            <div class="p-1 h-20 border">
-                <img :src="store.qr" alt="store.name" class="h-full w-auto">
+        <div class="h-32 bg-no-repeat bg-cover bg-scroll relative" :style="{backgroundImage: 'url(\'' + image + '\')' }">
+            <div class="flex justify-center items-center w-full h-full">
+                <div class="p-1 h-20 border">
+                    <img :src="store.qr" alt="store.name" class="h-full w-auto">
+                </div>
+            </div>
+            <div class="absolute -bottom-8 left-0">
+                <img :src="image" :alt="store.name + ' ownder'" class="w-20 h-20 rounded-full">
             </div>
         </div>
 
@@ -50,7 +55,7 @@
             <!-- share options -->
             <div class="grid grid-cols-2">
                 <div class="text-center">
-                    <p>icon</p>
+                    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
                     <p>Facebook</p>
                 </div>
                 <div class="text-center">
@@ -72,11 +77,15 @@
                 fundings:[
                     {name: 'Purchase a new stove', amount: 150, progress: 20},
                     {name: 'Purchase a new table', amount: 120, progress: 40},
-                ]
+                ],
+                image: '/images/stores/' + this.store.images[0]
             }
         },
         components: {
             JetButton
+        },
+        mounted() {
+            console.log(this.image);
         }
     }
 </script>

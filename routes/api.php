@@ -14,10 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/store/create', 'App\Http\Controllers\StoreController@Create');
+
+Route::post('/files/upload', 'App\Http\Controllers\StoreController@UploadFiles');
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::post('/store/create', 'App\Http\Controllers\StoreController@Create');
 
 Route::middleware('auth:sanctum')->get('/store/{name}', 'App\Http\Controllers\StoreController@Get');

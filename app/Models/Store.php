@@ -20,6 +20,10 @@ class Store extends Model
         'qr'
     ];
 
+    protected $casts = [
+        'images' => 'json',
+    ];
+
     protected $hidden = [
         'user_id'
     ];

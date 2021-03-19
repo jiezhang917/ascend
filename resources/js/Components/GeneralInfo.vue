@@ -18,8 +18,10 @@
         <jet-input class="h-14 block mb-6 p-2.5 w-full" placeholder="Pick a business category" 
             v-model="category"/>
 
+        <slot></slot>
+
         <!-- actions -->
-        <div class="flex justify-between">
+        <div class="flex justify-between mt-7">
             <jet-button class="block uppercase text-white text-sm text-center font-bold bg-orange py-3 rounded-xl mb-7" 
                 @click="$emit('go-prev')">
                 Prev
@@ -47,7 +49,7 @@
             return {
                 name: this.businessName,
                 description: this.businessDesc,
-                category: this.businessCategory
+                category: this.businessCategory,
             }
         },
         methods: {
