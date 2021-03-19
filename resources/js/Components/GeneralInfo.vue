@@ -7,18 +7,23 @@
             Let people know your business <br class="inline-block md:hidden"/> why you are great!
         </p>
 
-        <!-- todo: show icon if has input -->
-        <jet-input class="h-14 block mb-6 p-2.5 w-full" placeholder="Business name" 
-            v-model="name"/>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- todo: show icon if has input -->
+            <jet-input class="h-14 w-full p-2.5 md:col-span-2" placeholder="Business name" 
+                v-model="name"/>
 
-        <!-- todo: show modal with examples -->
-        <jet-input class="h-14 block mb-6 p-2.5 w-full" placeholder="Describe your business" 
-            v-model="description"/>
+            <!-- todo: show modal with examples -->
+            <jet-input class="h-14 w-full p-2.5 md:col-span-2" placeholder="Describe your business" 
+                v-model="description"/>
 
-        <jet-input class="h-14 block mb-6 p-2.5 w-full" placeholder="Pick a business category" 
-            v-model="category"/>
+            <jet-input class="h-14 w-full p-2.5 md:col-span-1" placeholder="Pick a business category" 
+                v-model="category"/>
 
-        <slot></slot>
+            <div class="md:col-span-1 flex items-center">
+                <slot></slot>
+            </div>
+
+        </div>
 
         <!-- actions -->
         <div class="flex justify-between mt-7">

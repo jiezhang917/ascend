@@ -66,7 +66,7 @@
 
         <!-- Add donation items -->
         <div v-if="step === 4">
-            <add-donation :donation="donation" @go-prev="goPrev" @update:donation="addDonation"/>
+            <add-donation :initial-donations="donations" @go-prev="goPrev" @update:donation="addDonation"/>
         </div>
 
         <!-- Submit info -->
@@ -160,7 +160,13 @@
                 businessDesc: '',
                 businessCategory: '',
                 theme: '',
-                donation: {},
+                donations: [
+                    {
+                        amount: 0,
+                        purpose: '',
+                        account: '',
+                    }
+                ],
                 fileData: null,
                 inProgress: false,
             }
@@ -208,7 +214,7 @@
                 this.goNext();
             },
             addDonation(data) {
-                this.donations = [data];
+                this.donations = data;
                 this.goNext();
             },
             submit() {
