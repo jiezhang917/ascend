@@ -10,8 +10,11 @@
 
         <div class="grid grid-cols-3 gap-4 justify-items-center">
             <div v-for="color in colors" :key="color">
-                <button :class="['w-20', 'h-20', 'rounded-full', 'border-4', 'border-black', theme === color ? 'bg-gray-200' : '']" 
-                    @click="setTheme(color)" />
+                <div :class="['rounded-full', 'bg-gray-200', 'outline-none', 'focus:outline-none', theme === color ? 'h-28' : 'color-box']">
+                    <button :class="['color-box', 'outline-none', 'focus:outline-none',
+                        'color-' + color.toLowerCase(), theme === color ? 'border-blue-300' : '']" 
+                        @click="setTheme(color)" />
+                </div>
                 <p class="text-center text-sm text-dark-slate-blue mt-4">{{ color }}</p>
             </div>
         </div>
@@ -29,6 +32,35 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+    .color-box {
+        width: 90px;
+        height: 94px;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+    .color-bohemian {
+        background-image: url('../../images/Bohemian.png');
+    }
+    .color-industrial {
+        background-image: url('../../images/Industrial.png');
+    }
+    .color-modern {
+        background-image: url('../../images/Modern.png');
+    }
+    .color-rustic_selected {
+        background-image: url('../../images/Rustic_selected.png');
+    }
+    .color-rustic {
+        background-image: url('../../images/Rustic.png');
+    }
+    .color-traditional {
+        background-image: url('../../images/Traditional.png');
+    }
+    .color-zen {
+        background-image: url('../../images/Zen.png');
+    }
+</style>
 
 <script>
     import JetButton from '@/Jetstream/Button';
