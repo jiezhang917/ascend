@@ -35,16 +35,20 @@
         </div>
 
         <!-- progress bar -->
-        <div class="pt-5 pb-7" v-if="step !== 1">
-            <div class="flex justify-center">
-                <div class="w-3/4">
+        <div class="pt-5 pb-7 px-5 grid grid-cols-12" v-if="step !== 1">
+            <div class="col-span-1 flex justify-center items-center" @click="goPrev">
+                <span class="transform scale-150">&#8249;</span>
+            </div>
+
+            <div class="col-start-3 col-span-8 flex items-center">
+                <div class="w-full">
                     <div class="overflow-hidden h-2 text-xs flex rounded bg-red-100">
                         <div :style="progressStyle" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-300"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="float-right -mt-3 pr-2">
+            <div class="col-start-12 col-span-1 flex justify-center items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-auto h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                 </svg>
@@ -53,7 +57,7 @@
 
         <!-- General business info -->
         <div v-if="step === 2">
-            <general-info @go-prev="goPrev" @update:info="updateInfo"
+            <general-info @update:info="updateInfo"
                 :business-name="businessName" :business-desc="businessDesc" :business-category="businessCategory">
                 <jet-input type="file" name="photos" accept="image/png, image/jpeg" @change="saveFiles"/>
             </general-info>
@@ -61,12 +65,12 @@
 
         <!-- Select a theme -->
         <div v-if="step === 3">
-            <select-theme :initial-theme="theme" @go-prev="goPrev" @update:theme="setTheme"/>
+            <select-theme :initial-theme="theme" @update:theme="setTheme"/>
         </div>
 
         <!-- Add donation items -->
         <div v-if="step === 4">
-            <add-donation :initial-donations="donations" @go-prev="goPrev" @update:donation="addDonation"/>
+            <add-donation :initial-donations="donations" @update:donation="addDonation"/>
         </div>
 
         <!-- Submit info -->

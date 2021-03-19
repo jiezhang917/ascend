@@ -20,16 +20,10 @@
         </div>
 
         <!-- actions -->
-        <div class="flex justify-between mt-9">
-            <jet-button class="block uppercase text-white text-sm text-center font-bold bg-orange py-3 rounded-xl mb-7" 
-                @click="$emit('go-prev')">
-                Prev
-            </jet-button>
-            <jet-button class="block uppercase text-white text-sm text-center font-bold bg-orange py-3 rounded-xl mb-7 disabled:opacity-50" 
-                @click="submit" :disabled="!theme">
-                Next
-            </jet-button>
-        </div>
+        <jet-button class="w-full uppercase text-white text-sm justify-center font-bold bg-orange py-3 mt-9 rounded-xl mb-7 disabled:opacity-50" 
+            @click="submit" :disabled="!theme">
+            Next
+        </jet-button>
     </div>
 </template>
 
@@ -73,7 +67,7 @@
                 theme: this.initialTheme,
             }
         },
-        emits: ['go-prev', 'update:theme'],
+        emits: ['update:theme'],
         components: {
             JetButton,
         },

@@ -26,16 +26,10 @@
         </div>
 
         <!-- actions -->
-        <div class="flex justify-between mt-7">
-            <jet-button class="block uppercase text-white text-sm text-center font-bold bg-orange py-3 rounded-xl mb-7" 
-                @click="$emit('go-prev')">
-                Prev
-            </jet-button>
-            <jet-button class="block uppercase text-white text-sm text-center font-bold bg-orange py-3 rounded-xl mb-7 disabled:opacity-50" 
-                @click="submit" :disabled="!name || !description || !category">
-                Next
-            </jet-button>
-        </div>
+        <jet-button class="w-full uppercase text-white text-sm justify-center font-bold bg-orange py-3 mt-7 rounded-xl mb-7 disabled:opacity-50" 
+            @click="submit" :disabled="!name || !description || !category">
+            Next
+        </jet-button>
     </div>
 </template>
 
@@ -49,7 +43,7 @@
             JetInput,
             JetButton,
         },
-        emits: ['update:info', 'go-prev', 'go-next'],
+        emits: ['update:info', 'go-next'],
         data() {
             return {
                 name: this.businessName,
