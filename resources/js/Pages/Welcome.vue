@@ -53,34 +53,23 @@
 
         <!-- General business info -->
         <div v-if="step === 2">
-            <general-info @update-name="businessName = $event" @update-desc="businessDesc = $event" 
-                @update-category="businessCategory = $event"
+            <general-info @go-prev="goPrev" @update:info="updateInfo"
                 :business-name="businessName" :business-desc="businessDesc" :business-category="businessCategory"/>
         </div>
 
         <!-- Select a theme -->
         <div v-if="step === 3">
-            <select-theme @update:theme="setTheme"/>
+            <select-theme :initial-theme="theme" @go-prev="goPrev" @update:theme="setTheme"/>
         </div>
 
         <!-- Add donation items -->
         <div v-if="step === 4">
-            <add-donation />
+            <add-donation :donation="donation" @go-prev="goPrev" @update:donation="addDonation"/>
         </div>
 
         <!-- Submit info -->
         <div v-if="step === 5">
             <final-step @submit="submit"/>
-        </div>
-
-        <!-- actions -->
-        <div class="flex justify-between px-7" v-if="step > 1 && step < 5">
-            <jet-button class="block uppercase text-white text-sm text-center font-bold bg-button py-3 rounded-xl mb-7" @click="goPrev">
-                Prev
-            </jet-button>
-            <jet-button class="block uppercase text-white text-sm text-center font-bold bg-button py-3 rounded-xl mb-7" @click="goNext">
-                Next
-            </jet-button>
         </div>
     </div>
 </template>
@@ -167,7 +156,9 @@
                 businessName: '',
                 businessDesc: '',
                 businessCategory: '',
-                theme: ''
+                theme: '',
+                donation: {},
+                inProgress: false
             }
         },
         computed: {
@@ -189,8 +180,36 @@
             goNext() {
                 this.step++;
             },
+            updateInfo(data) {
+                this.businessName = data.name;
+                this.businessDesc = data.description;
+                this.businessCategory = data.category;
+                this.goNext();
+            },
+            setTheme(theme) {
+                this.theme = theme;
+                this.goNext();
+            },
+            addDonation(data) {
+                this.donations = [data];
+                this.goNext();
+            },
             submit() {
-                console.log(this.$data);
+                this.inProgress = true;
+                axios.post('/api/store/create', {
+                    name: this.businessName,
+                    description: this.businessDesc,
+                    category: this.businessCategory,
+                    theme: this.theme,
+                    donations: this.donations,
+                    images: [],
+                }).then((response) => {
+                    this.inProgress = false;
+                    window.location.href = response.data.url;
+                }).catch(error => {
+                    this.inProgress = false;
+                    // todo: alert
+                });
             }
         }
     }

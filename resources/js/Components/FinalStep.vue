@@ -35,6 +35,7 @@
     import JetButton from '@/Jetstream/Button';
 
     export default {
+        emits: ['submit'],
         components: {
             JetButton,
         },

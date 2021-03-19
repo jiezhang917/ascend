@@ -22,6 +22,13 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/store/{name}', function ($name) {
+    $store = \App\Models\Store::where('name', $name)->first();
+    return Inertia::render('Store', [
+        'store' => $store
+    ]);
+});
+
 Route::get('/developer', function () {
     return Inertia::render('Developer', [
         'canLogin' => Route::has('login'),

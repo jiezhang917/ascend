@@ -27,6 +27,18 @@
             <p class="opacity-70">Tom, funded $400 for design on March. 12. 2021</p>
             <p class="opacity-50">Mary, funded $60 for repairing on March. 10. 2021</p>
         </div>
+
+        <!-- actions -->
+        <div class="flex justify-between">
+            <jet-button class="block uppercase text-white text-sm text-center font-bold bg-button py-3 rounded-xl mb-7" 
+                @click="$emit('go-prev')">
+                Prev
+            </jet-button>
+            <jet-button class="block uppercase text-white text-sm text-center font-bold bg-button py-3 rounded-xl mb-7 disabled:opacity-50" 
+                @click="submit" :disabled="!amount || !purpose || !account">
+                Next
+            </jet-button>
+        </div>
     </div>
 </template>
 
@@ -35,16 +47,27 @@
     import JetInput from '@/Jetstream/Input'
 
     export default {
+        props: ['donation'],
         data() {
             return {
-                amount: 0,
-                purpose: '',
-                account: ''
+                amount: this.donation.amount,
+                purpose: this.donation.purpose,
+                account: this.donation.account,
             }
         },
+        emits: ['go-prev', 'update:donation'],
         components: {
             JetButton,
             JetInput,
         },
+        methods: {
+            submit() {
+                this.$emit('update:donation', {
+                    amount: this.amount,
+                    purpose: this.purpose,
+                    account: this.account
+                });
+            }
+        }
     }
 </script>
