@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Store;
 use App\Models\User;
+use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
@@ -33,5 +34,12 @@ class StoreController extends Controller
             'success' => true,
             'url' => $url
         ]);
+    }
+
+    public function Get(Request $request, $name)
+    {
+        $store = Store::where('name', $name)->first();
+        
+        return Response()->json($store);
     }
 }

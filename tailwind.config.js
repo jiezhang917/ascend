@@ -16,10 +16,12 @@ module.exports = {
             },
             backgroundColor: theme => ({
                 'primary': '#fef6e4',
-                'button': '#ff6363'
+                'orange': '#ff6363',
+                'green': '#65a875'
             }),
             textColor: {
-                'dark-slate-blue': '#172c66'
+                'dark-slate-blue': '#172c66',
+                'dark': '#3a2006'
             }
         },
     },

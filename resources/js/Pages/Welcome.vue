@@ -20,7 +20,7 @@
                 <div class="flex justify-center mt-24">
                     <div class="w-80">
                         <jet-button @click="goNext"
-                            class="block uppercase text-white text-sm font-bold bg-button w-full py-3 rounded-xl mb-7 justify-center">
+                            class="block uppercase text-white text-sm font-bold bg-orange w-full py-3 rounded-xl mb-7 justify-center">
                             Get Started
                         </jet-button>
                         <div class="flex justify-center">

@@ -33,6 +33,7 @@ Route::get('/developer', function () {
     return Inertia::render('Developer', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
+        'user' => null
     ]);
 });
 

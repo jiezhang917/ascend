@@ -1,15 +1,16 @@
 <template>
     <app-layout>
-        <template #header>
+        <!-- <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Dashboard
             </h2>
-        </template>
+        </template> -->
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-6 md:px-8">
                 <div>
-                    Welcome to HELB!
+                    If you don't have a token yet, please retrive one through the 
+                    <inertia-link href="/user/api-tokens" class="text-center underline">API Tokens page.</inertia-link>
                 </div>
             </div>
         </div>

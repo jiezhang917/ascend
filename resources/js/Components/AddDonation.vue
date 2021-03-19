@@ -30,11 +30,11 @@
 
         <!-- actions -->
         <div class="flex justify-between">
-            <jet-button class="block uppercase text-white text-sm text-center font-bold bg-button py-3 rounded-xl mb-7" 
+            <jet-button class="block uppercase text-white text-sm text-center font-bold bg-orange py-3 rounded-xl mb-7" 
                 @click="$emit('go-prev')">
                 Prev
             </jet-button>
-            <jet-button class="block uppercase text-white text-sm text-center font-bold bg-button py-3 rounded-xl mb-7 disabled:opacity-50" 
+            <jet-button class="block uppercase text-white text-sm text-center font-bold bg-orange py-3 rounded-xl mb-7 disabled:opacity-50" 
                 @click="submit" :disabled="!amount || !purpose || !account">
                 Next
             </jet-button>
