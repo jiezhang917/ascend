@@ -8,7 +8,7 @@
             Customers are willing to help!
         </p>
 
-        <div class="mb-24">
+        <div class="mb-32">
             <div class="mb-6 grid grid-cols-6 gap-4" v-for="(donation, index) in donations" :key="index">
                 <div class="col-span-2">
                     <div class="relative">
@@ -66,10 +66,14 @@
         </div>
 
         <!-- actions -->
-        <jet-button class="w-full uppercase text-white text-sm justify-center font-bold bg-orange py-3 rounded-xl mb-7 disabled:opacity-50" 
-            @click="submit" :disabled="btnDisabled">
-            Next
-        </jet-button>
+        <div class="fixed w-full bottom-0 left-0 grid grid-cols-12">
+            <div class="col-start-2 col-span-10">
+                <jet-button class="w-full uppercase text-white text-sm justify-center font-bold bg-orange py-3 rounded-xl mb-7 disabled:opacity-50" 
+                    @click="submit" :disabled="btnDisabled">
+                    Next
+                </jet-button>
+            </div>
+        </div>
     </div>
 </template>
 

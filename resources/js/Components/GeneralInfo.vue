@@ -54,10 +54,14 @@
         </div>
 
         <!-- actions -->
-        <jet-button class="w-full uppercase text-white text-sm justify-center font-bold bg-orange py-3 mt-7 rounded-xl mb-7 disabled:opacity-50" 
-            @click="submit" :disabled="!name || !description || !category">
-            Next
-        </jet-button>
+        <div class="fixed w-full bottom-0 left-0 grid grid-cols-12">
+            <div class="col-start-2 col-span-10">
+                <jet-button class="w-full uppercase text-white text-sm justify-center font-bold bg-orange py-3 mt-7 rounded-xl mb-7 disabled:opacity-50" 
+                    @click="submit" :disabled="!name || !description || !category">
+                    Next
+                </jet-button>
+            </div>
+        </div>
 
         <info-modal v-if="showModal" @close="showModal = false"/>
     </div>
