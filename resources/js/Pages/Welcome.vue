@@ -26,7 +26,7 @@
                         <div class="flex justify-center">
                             <p class="text-dark-slate-blue text-xs">
                                 <span>Already have an account? </span>
-                                <inertia-link href="/login" class="underline">Login</inertia-link>
+                                <inertia-link href="/login" class="underline font-bold">Login</inertia-link>
                             </p>
                         </div>
                     </div>
