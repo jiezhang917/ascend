@@ -1,18 +1,17 @@
 <template>
-    <div class="px-7 mb-7">
+    <div class="px-8 mb-7">
         <h2 class="text-dark-slate-blue font-bold text-xl mb-4 text-center">
-            Choose a color scheme for your profile. 
+            Personalize your profile.  
         </h2>
         
         <p class="text-dark-slate-blue text-sm mb-3.5 text-center">
-            Choose one that reflects your business.
+            Choose a color scheme that reflects your business!
         </p>
 
-        <div class="grid grid-cols-3 gap-4 justify-items-center">
+        <div class="grid grid-cols-3 gap-x-4 justify-items-center">
             <div v-for="color in colors" :key="color">
-                <div :class="['rounded-full', 'bg-gray-200', 'outline-none', 'focus:outline-none', theme === color ? 'h-28' : 'color-box']">
-                    <button :class="['color-box', 'outline-none', 'focus:outline-none',
-                        'color-' + color.toLowerCase(), theme === color ? 'border-blue-300' : '']" 
+                <div :class="['rounded-full h-28 outline-none focus:outline-none flex flex-wrap', theme === color ? 'bg-gray-200 content-start' : 'content-end']">
+                    <button :class="['color-box outline-none focus:outline-none', 'color-' + color.replace(' ', '_').toLowerCase()]" 
                         @click="setTheme(color)" />
                 </div>
                 <p class="text-center text-sm text-dark-slate-blue mt-4">{{ color }}</p>

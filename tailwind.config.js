@@ -17,11 +17,13 @@ module.exports = {
             backgroundColor: theme => ({
                 'primary': '#fef6e4',
                 'orange': '#ff6363',
-                'green': '#65a875'
+                'green': '#65a875',
+                'dark-blue': '#172c66'
             }),
             textColor: {
                 'dark-slate-blue': '#172c66',
-                'dark': '#3a2006'
+                'dark': '#3a2006',
+                'modal': '#172c66'
             }
         },
     },

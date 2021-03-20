@@ -12,8 +12,8 @@ have docker running_
 * redis:alpine
 
 ### Bring it up
-1. Run: `./vendor/bin/sail up`
-2. Install php dependencies: `composer install`
+1. Install php dependencies: `composer install`
+2. Run: `./vendor/bin/sail up`
 3. Install javascript dependencies: `npm install`
 4. Compile css and js: `npm run prod`
 5. Open your browser: http://localhost
