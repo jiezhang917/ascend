@@ -41,10 +41,10 @@
             <span class="col-span-8">Increase awareness of your financial needs without asking directly.</span>
         </p>
 
-        <jet-button class="block uppercase text-white text-sm text-center font-bold bg-orange w-full py-3 rounded-xl mb-3.5" @click="$emit('submit')">
+        <jet-button class="block uppercase text-white text-sm justify-center font-bold bg-orange w-full py-3 rounded-xl mb-3.5" @click="$emit('submit')">
             CONTINUE WITH WECHAT
         </jet-button>
-        <jet-button class="block uppercase text-white text-sm text-center font-bold bg-orange w-full py-3 rounded-xl mb-6" @click="$emit('submit')">
+        <jet-button class="block uppercase text-white text-sm justify-center font-bold bg-orange w-full py-3 rounded-xl mb-6" @click="$emit('submit')">
             CONTINUE WITH FACEBOOK
         </jet-button>
         

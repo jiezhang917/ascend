@@ -26,7 +26,7 @@ class StoreController extends Controller
 
         $data = $request->all();
         $data['donations'] = json_encode($data['donations']);
-        $data['images'] = json_encode($data['images']);
+        $data['images'] = $data['images'] ? json_encode($data['images']) : '';
         $data['user_id'] = $user->id;
         $data['qr'] = $qr;
 

@@ -24,14 +24,7 @@
             <jet-input type="text" class="h-14 w-full p-2.5 mb-6" placeholder="Describe your business" 
                 v-model="description"/>
 
-            <div class="absolute right-2 top-3">
-                <svg class="h-8 w-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" 
-                    @click="showModal = true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-            </div>
-
-            <div class="absolute right-9 top-3" v-if="description">
+            <div class="absolute right-2 top-3" v-if="description">
                 <svg class="h-8 w-auto stroke-current text-blue-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
@@ -62,22 +55,18 @@
                 </jet-button>
             </div>
         </div>
-
-        <info-modal v-if="showModal" @close="showModal = false"/>
     </div>
 </template>
 
 <script>
     import JetInput from '@/Jetstream/Input'
     import JetButton from '@/Jetstream/Button';
-    import InfoModal from './InfoModal';
 
     export default {
         props: ['businessName', 'businessDesc', 'businessCategory'],
         components: {
             JetInput,
             JetButton,
-            InfoModal,
         },
         emits: ['update:info', 'go-next'],
         data() {
@@ -85,7 +74,6 @@
                 name: this.businessName,
                 description: this.businessDesc,
                 category: this.businessCategory,
-                showModal: false
             }
         },
         methods: {

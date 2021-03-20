@@ -50,8 +50,8 @@
                 </div>
             </div>
 
-            <div class="col-start-12 col-span-1 flex justify-center items-center">
-                <svg class="h-6 w-auto" viewBox="0 0 395 395" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div class="col-start-12 col-span-1 flex justify-center items-center" v-if="step === 2">
+                <svg class="h-6 w-auto" viewBox="0 0 395 395" fill="none" xmlns="http://www.w3.org/2000/svg" @click="showModal = true">
                     <g clip-path="url(#clip0)">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M345.485 50.5147C350.172 55.201 350.172 62.799 345.485 67.4853L201.985 210.985C197.299 215.672 189.701 215.672 185.015 210.985C180.328 206.299 180.328 198.701 185.015 194.015L328.515 50.5147C333.201 45.8284 340.799 45.8284 345.485 50.5147Z" fill="#FF6363"/>
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M309.512 73.0329L362.654 126.624C371.21 135.252 371.151 149.181 362.524 157.736L320.376 199.531C311.673 208.161 297.596 208.015 289.074 199.207L236.777 145.151L309.512 73.0329ZM309.368 106.973L270.51 145.502L304.915 181.064L344.204 142.103L309.368 106.973Z" fill="#FF6363"/>
@@ -88,6 +88,8 @@
         <div v-if="step === 5">
             <final-step @submit="submit"/>
         </div>
+
+        <info-modal v-if="showModal" @close="showModal = false"/>
     </div>
 </template>
 
@@ -162,6 +164,7 @@
     import SelectTheme from '../Components/SelectTheme';
     import AddDonation from '../Components/AddDonation';
     import FinalStep from '../Components/FinalStep';
+    import InfoModal from '../Components/InfoModal';
 
     export default {
         props: {
@@ -185,6 +188,7 @@
                 fileData: null,
                 images: null,
                 inProgress: false,
+                showModal: false,
             }
         },
         computed: {
@@ -199,6 +203,7 @@
             SelectTheme,
             AddDonation,
             FinalStep,
+            InfoModal,
         },
         methods: {
             goPrev() {

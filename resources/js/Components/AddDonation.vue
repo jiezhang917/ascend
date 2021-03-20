@@ -59,14 +59,14 @@
             </div>
         </div>
 
-        <div class="text-xs text-center">
-            <p>Jack, funded $100 for marketing on March. 14. 2021</p>
-            <p class="opacity-70">Tom, funded $400 for design on March. 12. 2021</p>
-            <p class="opacity-50">Mary, funded $60 for repairing on March. 10. 2021</p>
-        </div>
-
         <!-- actions -->
         <div class="fixed w-full bottom-0 left-0 grid grid-cols-12">
+            <div class="text-xs text-center col-span-12">
+                <p>Jack, funded $100 for marketing on March. 14. 2021</p>
+                <p class="opacity-70">Tom, funded $400 for design on March. 12. 2021</p>
+                <p class="opacity-50">Mary, funded $60 for repairing on March. 10. 2021</p>
+            </div>
+
             <div class="col-start-2 col-span-10">
                 <jet-button class="w-full uppercase text-white text-sm justify-center font-bold bg-orange py-3 rounded-xl mb-7 disabled:opacity-50" 
                     @click="submit" :disabled="btnDisabled">

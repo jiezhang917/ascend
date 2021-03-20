@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="store-wrapper">
         <div :class="['h-32 bg-no-repeat bg-cover bg-scroll relative', image ? '' : 'linear-bg']" :style="styles">
             <div class="flex justify-center items-center w-full h-full">
                 <div class="p-1 h-20 border">
@@ -7,7 +7,7 @@
                 </div>
             </div>
             <div class="absolute -bottom-8 left-0">
-                <img :src="image || '/images/stores/happy.png'" :alt="store.name + ' ownder'" class="w-20 h-20 ml-5 rounded-full">
+                <img src="/images/stores/happy.png" :alt="store.name + ' ownder'" class="w-20 h-20 ml-5 rounded-full">
             </div>
         </div>
 
@@ -16,7 +16,7 @@
 
             <p class="text-sm mb-3.5">About the business: Bringing high-quality milk tea, and delicious, fresh boba to all. </p>
 
-            <hr class="border bg-green mb-3">
+            <hr class="border bg-light-green mb-3">
 
             <h2 class="text-base font-bold mb-4">Support the business</h2>
 
@@ -34,7 +34,7 @@
                 </jet-button>
             </div>
 
-            <hr class="border bg-green mt-5 mb-3.5">
+            <hr class="border bg-light-green mt-5 mb-3.5">
 
             <h2 class="text-base font-bold text-center mb-3.5">Funding progress</h2>
 
@@ -43,8 +43,10 @@
                     <p class="col-span-7 text-xs">{{funding.name}}</p>
                     <p class="col-span-3 text-right text-xs font-bold">${{funding.amount}} away</p>
                 </div>
-                <div class="overflow-hidden h-2 text-xs flex rounded bg-green-100 mt-2">
-                    <div :style="{width: funding.progress + '%'}" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-300"></div>
+                <div class="w-full">
+                    <div class="overflow-hidden h-6 text-xs flex rounded progress-bar mt-2 rounded-full">
+                        <div :style="{width: funding.progress + '%'}" class="shadow-none flex flex-col whitespace-nowrap text-white justify-center bg-green rounded-full"></div>
+                    </div>
                 </div>
             </div>
 
@@ -55,11 +57,15 @@
             <!-- share options -->
             <div class="grid grid-cols-2">
                 <div class="text-center">
-                    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+                    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small">
+                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore icon-facebook">
+                            <span class="inline-block w-5"></span>
+                        </a>
+                    </div>
                     <p>Facebook</p>
                 </div>
-                <div class="text-center">
-                    <p>icon</p>
+                <div class="flex flex-col items-center">
+                    <p><img src="/images/wechat.png" alt=""></p>
                     <p>Wechat</p>
                 </div>
             </div>
@@ -68,8 +74,19 @@
 </template>
 
 <style scoped>
+    .store-wrapper {
+        background-color: #FEF6E4;
+    }
     .linear-bg {
         background-image: linear-gradient(rgb(116, 191, 80) 0%, rgb(158, 59, 16) 100%);
+    }
+    .icon-facebook {
+        background-image: url('/images/facebook.png');
+        background-repeat: no-repeat;
+        background-size: 13px 22px;
+    }
+    .progress-bar {
+        background-color: rgba(243, 210, 193, 0.68);
     }
 </style>
 
@@ -81,8 +98,8 @@
         data() {
             return {
                 fundings:[
-                    {name: 'Purchase a new stove', amount: 150, progress: 20},
-                    {name: 'Purchase a new table', amount: 120, progress: 40},
+                    {name: 'Purchase a new stove', amount: 150, progress: 8},
+                    {name: 'Purchase a new table', amount: 120, progress: 8},
                 ],
                 image: this.store.images ? '/images/stores/' + this.store.images.replace(/"/g, '') : ''
             }
