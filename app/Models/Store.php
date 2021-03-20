@@ -21,7 +21,7 @@ class Store extends Model
     ];
 
     protected $casts = [
-        'images' => 'json',
+        'donations' => 'json',
     ];
 
     protected $hidden = [

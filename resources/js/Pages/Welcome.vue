@@ -37,7 +37,9 @@
         <!-- progress bar -->
         <div class="pt-5 pb-7 px-5 grid grid-cols-12" v-if="step !== 1">
             <div class="col-span-1 flex justify-center items-center" @click="goPrev">
-                <span class="transform scale-150">&#8249;</span>
+                <svg class="h-6 w-auto" viewBox="0 0 396 396" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M207.485 25.5147C212.172 30.201 212.172 37.799 207.485 42.4853L53.8677 196.103L207.588 353.619C212.217 358.362 212.124 365.959 207.381 370.588C202.638 375.217 195.041 375.124 190.412 370.381L28.4119 204.381C23.8229 199.679 23.8688 192.161 28.5147 187.515L190.515 25.5147C195.201 20.8284 202.799 20.8284 207.485 25.5147Z" fill="#FF6363"/>
+                </svg>
             </div>
 
             <div class="col-start-3 col-span-8 flex items-center">
@@ -49,8 +51,17 @@
             </div>
 
             <div class="col-start-12 col-span-1 flex justify-center items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-auto h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                <svg class="h-6 w-auto" viewBox="0 0 395 395" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0)">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M345.485 50.5147C350.172 55.201 350.172 62.799 345.485 67.4853L201.985 210.985C197.299 215.672 189.701 215.672 185.015 210.985C180.328 206.299 180.328 198.701 185.015 194.015L328.515 50.5147C333.201 45.8284 340.799 45.8284 345.485 50.5147Z" fill="#FF6363"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M309.512 73.0329L362.654 126.624C371.21 135.252 371.151 149.181 362.524 157.736L320.376 199.531C311.673 208.161 297.596 208.015 289.074 199.207L236.777 145.151L309.512 73.0329ZM309.368 106.973L270.51 145.502L304.915 181.064L344.204 142.103L309.368 106.973Z" fill="#FF6363"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M21 223C21 202.013 38.0132 185 59 185H173C193.987 185 211 202.013 211 223V337C211 357.987 193.987 375 173 375H59C38.0132 375 21 357.987 21 337V223ZM59 209C51.268 209 45 215.268 45 223V337C45 344.732 51.268 351 59 351H173C180.732 351 187 344.732 187 337V223C187 215.268 180.732 209 173 209H59Z" fill="#FF6363"/>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0">
+                    <rect width="395" height="395" fill="white"/>
+                    </clipPath>
+                    </defs>
                 </svg>
             </div>
         </div>
@@ -70,7 +81,7 @@
 
         <!-- Add donation items -->
         <div v-if="step === 4">
-            <add-donation :initial-donations="donations" @update:donation="addDonation"/>
+            <add-donation :initial-donations="donations" :initial-account="account" @update:donation="addDonation"/>
         </div>
 
         <!-- Submit info -->
@@ -164,14 +175,15 @@
                 businessDesc: '',
                 businessCategory: '',
                 theme: '',
+                account: '',
                 donations: [
                     {
                         amount: 0,
                         purpose: '',
-                        account: '',
                     }
                 ],
                 fileData: null,
+                images: null,
                 inProgress: false,
             }
         },
@@ -218,33 +230,49 @@
                 this.goNext();
             },
             addDonation(data) {
-                this.donations = data;
+                this.account = data.account;
+                this.donations = data.donations;
                 this.goNext();
             },
             submit() {
                 this.inProgress = true;
-                axios.post('/api/files/upload', this.fileData, {
-                    headers: {
-                    'Content-Type': 'multipart/form-data'
-                    }
-                }).then((response) => {
-                    const img = response.data.image;
-                    axios.post('/api/store/create', {
-                        name: this.businessName,
-                        description: this.businessDesc,
-                        category: this.businessCategory,
-                        theme: this.theme,
-                        donations: this.donations,
-                        images: [img],
+                if (this.fileData) {
+                    axios.post('/api/files/upload', this.fileData, {
+                        headers: {
+                        'Content-Type': 'multipart/form-data'
+                        }
                     }).then((response) => {
-                        this.inProgress = false;
-                        window.location.href = response.data.url;
+                        this.images = response.data.image;
+                        this.createProfile();
                     }).catch(error => {
                         this.inProgress = false;
-                        // todo: alert
                     });
+                } else {
+                    this.createProfile();
+                }
+            },
+            createProfile() {
+                const donations = {
+                    account: this.account,
+                    donations: this.donations
+                };
+                axios.post('/api/store/create', {
+                    name: this.businessName,
+                    description: this.businessDesc,
+                    category: this.businessCategory,
+                    theme: this.theme,
+                    donations: donations,
+                    images: this.images,
+                }).then((response) => {
+                    this.inProgress = false;
+                    if (!response.data.success) {
+                        alert('Failed to create store');
+                        return;
+                    }
+                    window.location.href = response.data.url;
                 }).catch(error => {
                     this.inProgress = false;
+                    alert('Something went wrong')
                 });
             }
         }

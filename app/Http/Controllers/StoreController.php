@@ -30,13 +30,21 @@ class StoreController extends Controller
         $data['user_id'] = $user->id;
         $data['qr'] = $qr;
 
-        $store = new Store($data);
-        $store->save();
+        try {
+            $store = new Store($data);
+            $store->save();
+            $response = [
+                'success' => true,
+                'url' => $url
+            ];
+        } catch (\Throwable $e) {
+            $response = [
+                'success' => false,
+                'error' => 'Store already created'
+            ];
+        }
 
-        return Response()->json([
-            'success' => true,
-            'url' => $url
-        ]);
+        return Response()->json($response);
     }
 
     /**

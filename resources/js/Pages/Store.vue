@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="h-32 bg-no-repeat bg-cover bg-scroll relative" :style="{backgroundImage: 'url(\'' + image + '\')' }">
+        <div :class="['h-32 bg-no-repeat bg-cover bg-scroll relative', image ? '' : 'linear-bg']" :style="styles">
             <div class="flex justify-center items-center w-full h-full">
                 <div class="p-1 h-20 border">
                     <img :src="store.qr" alt="store.name" class="h-full w-auto">
                 </div>
             </div>
             <div class="absolute -bottom-8 left-0">
-                <img :src="image" :alt="store.name + ' ownder'" class="w-20 h-20 rounded-full">
+                <img :src="image || '/images/stores/happy.png'" :alt="store.name + ' ownder'" class="w-20 h-20 ml-5 rounded-full">
             </div>
         </div>
 
@@ -67,6 +67,12 @@
     </div>
 </template>
 
+<style scoped>
+    .linear-bg {
+        background-image: linear-gradient(rgb(116, 191, 80) 0%, rgb(158, 59, 16) 100%);
+    }
+</style>
+
 <script>
     import JetButton from '@/Jetstream/Button';
 
@@ -78,14 +84,18 @@
                     {name: 'Purchase a new stove', amount: 150, progress: 20},
                     {name: 'Purchase a new table', amount: 120, progress: 40},
                 ],
-                image: '/images/stores/' + this.store.images[0]
+                image: this.store.images ? '/images/stores/' + this.store.images.replace(/"/g, '') : ''
+            }
+        },
+        computed: {
+            styles() {
+                return this.image ? {
+                    backgroundImage: 'url(\'' + this.image + '\')'
+                } : '';
             }
         },
         components: {
             JetButton
         },
-        mounted() {
-            console.log(this.image);
-        }
     }
 </script>
