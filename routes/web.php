@@ -24,6 +24,9 @@ Route::get('/', function () {
 
 Route::get('/store/{name}', function ($name) {
     $store = \App\Models\Store::where('name', $name)->first();
+    if (empty($store)) {
+        abort(404, 'Store not found');
+    }
     return Inertia::render('Store', [
         'store' => $store
     ]);
