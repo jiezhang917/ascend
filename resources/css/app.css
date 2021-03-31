@@ -1,3 +1,27 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@font-face {
+    font-family: BasisGrotesquePro;
+    src: url('./font/BasisGrotesquePro-Regular.ttf');
+}
+
+@font-face {
+    font-family: BasisGrotesquePro-Bold;
+    src: url('./font/BasisGrotesquePro-Bold.ttf');
+}
+
+@font-face {
+    font-family: BasisGrotesquePro-Light;
+    src: url('./font/BasisGrotesquePro-Light.ttf');
+}
+
+.app-wrapper {
+    background-color: #fef6e4;
+}
+
+.app {
+    max-width: 1080px;
+    margin: 0 auto;
+}

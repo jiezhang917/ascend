@@ -17,8 +17,10 @@
         @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased">
-        @inertia
+    <body class="font-sans antialiased app-wrapper">
+        <div class="app">
+            @inertia
+        </div>
     </body>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=413915962805201&autoLogAppEvents=1" nonce="l6GsBkVv"></script>
 </html>

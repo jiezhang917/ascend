@@ -12,7 +12,9 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                sans: ['BasisGrotesquePro', ...defaultTheme.fontFamily.sans],
+                bold: ['BasisGrotesquePro-Bold', ...defaultTheme.fontFamily.sans],
+                light: ['BasisGrotesquePro-Light', ...defaultTheme.fontFamily.sans],
             },
             backgroundColor: theme => ({
                 'primary': '#fef6e4',

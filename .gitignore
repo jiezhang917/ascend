@@ -4,10 +4,11 @@
 /public/css
 /public/js
 /public/mix-manifest.json
+/public/images
+/public/fonts
 /storage
 /vendor
 /sail
-/public/images
 .env
 .env.backup
 .phpunit.result.cache
