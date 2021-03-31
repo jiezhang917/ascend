@@ -3,8 +3,8 @@
         <!-- welcome page -->
         <div class="mt-36 lg:mt-32 text-dark-slate-blue" v-if="step === 1">
             <div class="grid grid-cols-12 gap-x-2 lg:gap-x-6">
-                <div class="col-span-6 col-start-4 lg:col-span-4 lg:col-start-5">
-                    <svg class="h-auto w-full" viewBox="0 0 121 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div class="col-span-6 col-start-4 lg:col-span-4 lg:col-start-5 flex justify-center">
+                    <svg class="logo h-auto w-full" viewBox="0 0 121 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2 33.6C0.895431 33.6 0 32.7046 0 31.6V2C0 0.895431 0.895431 0 2 0H4.336C5.44057 0 6.336 0.89543 6.336 2V11.536C6.336 12.6406 7.23143 13.536 8.336 13.536H19.024C20.1286 13.536 21.024 12.6406 21.024 11.536V2C21.024 0.895429 21.9194 0 23.024 0H25.36C26.4646 0 27.36 0.895431 27.36 2V31.6C27.36 32.7046 26.4646 33.6 25.36 33.6H23.024C21.9194 33.6 21.024 32.7046 21.024 31.6V21.392C21.024 20.2874 20.1286 19.392 19.024 19.392H8.336C7.23143 19.392 6.336 20.2874 6.336 21.392V31.6C6.336 32.7046 5.44057 33.6 4.336 33.6H2Z" fill="#FF6363"/>
                         <path d="M38.9306 33.6C37.8261 33.6 36.9306 32.7046 36.9306 31.6V2C36.9306 0.895431 37.8261 0 38.9306 0H58.1146C59.2192 0 60.1146 0.89543 60.1146 2V3.664C60.1146 4.76857 59.2192 5.664 58.1146 5.664H45.2666C44.1621 5.664 43.2666 6.55943 43.2666 7.664V11.392C43.2666 12.4966 44.1621 13.392 45.2666 13.392H56.7706C57.8752 13.392 58.7706 14.2874 58.7706 15.392V17.056C58.7706 18.1606 57.8752 19.056 56.7706 19.056H45.2666C44.1621 19.056 43.2666 19.9514 43.2666 21.056V25.936C43.2666 27.0406 44.1621 27.936 45.2666 27.936H58.2586C59.3632 27.936 60.2586 28.8314 60.2586 29.936V31.6C60.2586 32.7046 59.3632 33.6 58.2586 33.6H38.9306Z" fill="#FF6363"/>
                         <path d="M70.705 33.6C69.6004 33.6 68.705 32.7046 68.705 31.6V2C68.705 0.895431 69.6004 0 70.705 0H73.041C74.1456 0 75.041 0.895431 75.041 2V25.744C75.041 26.8486 75.9364 27.744 77.041 27.744H89.889C90.9936 27.744 91.889 28.6394 91.889 29.744V31.6C91.889 32.7046 90.9936 33.6 89.889 33.6H70.705Z" fill="#FF6363"/>
@@ -14,9 +14,9 @@
                 <h1 class="col-span-12 text-xl lg:text-5xl font-bold mt-6 lg:mt-11 text-center">Welcome to HELB!</h1>
                 <p class="col-span-6 col-start-4 lg:col-span-4 lg:col-start-5 text-sm lg:text-2xl mt-2 lg:mt-2.5 text-center">We are here to help small business owners like you.</p>
 
-                <div class="col-span-10 col-start-2 lg:col-span-6 lg:col-start-4 mt-28 lg:mt-36">
+                <div class="col-span-10 col-start-2 lg:col-span-6 lg:col-start-4 mt-28 lg:mt-36 text-center">
                     <jet-button @click="goNext"
-                        class="block uppercase text-white text-sm lg:text-2xl font-bold bg-orange w-full lg:h-16 rounded-xl justify-center">
+                        class="app-btn block uppercase text-white text-sm lg:text-2xl font-bold bg-orange w-full lg:h-16 rounded-xl justify-center">
                         Get Started
                     </jet-button>
                 </div>
@@ -90,65 +90,18 @@
 </template>
 
 <style scoped>
-    .bg-gray-100 {
-        background-color: #f7fafc;
-        background-color: rgba(247, 250, 252, var(--tw-bg-opacity));
+    .logo {
+        max-width: 9.75rem;
     }
-
-    .border-gray-200 {
-        border-color: #edf2f7;
-        border-color: rgba(237, 242, 247, var(--tw-border-opacity));
+    .app-btn {
+        max-width: 17rem;;
     }
-
-    .text-gray-400 {
-        color: #cbd5e0;
-        color: rgba(203, 213, 224, var(--tw-text-opacity));
-    }
-
-    .text-gray-500 {
-        color: #a0aec0;
-        color: rgba(160, 174, 192, var(--tw-text-opacity));
-    }
-
-    .text-gray-600 {
-        color: #718096;
-        color: rgba(113, 128, 150, var(--tw-text-opacity));
-    }
-
-    .text-gray-700 {
-        color: #4a5568;
-        color: rgba(74, 85, 104, var(--tw-text-opacity));
-    }
-
-    .text-gray-900 {
-        color: #1a202c;
-        color: rgba(26, 32, 44, var(--tw-text-opacity));
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .dark\:bg-gray-800 {
-            background-color: #2d3748;
-            background-color: rgba(45, 55, 72, var(--tw-bg-opacity));
+    @media (min-width: 1024px) {
+        .logo {
+            max-width: 20rem;
         }
-
-        .dark\:bg-gray-900 {
-            background-color: #1a202c;
-            background-color: rgba(26, 32, 44, var(--tw-bg-opacity));
-        }
-
-        .dark\:border-gray-700 {
-            border-color: #4a5568;
-            border-color: rgba(74, 85, 104, var(--tw-border-opacity));
-        }
-
-        .dark\:text-white {
-            color: #fff;
-            color: rgba(255, 255, 255, var(--tw-text-opacity));
-        }
-
-        .dark\:text-gray-400 {
-            color: #cbd5e0;
-            color: rgba(203, 213, 224, var(--tw-text-opacity));
+        .app-btn {
+            max-width: 31rem;;
         }
     }
 </style>
