@@ -1,13 +1,13 @@
 <template>
     <div class="store-wrapper">
-        <div :class="['h-32 bg-no-repeat bg-cover bg-scroll relative', image ? '' : 'linear-bg']" :style="styles">
+        <div class="h-32 bg-no-repeat bg-cover bg-scroll relative linear-bg">
             <div class="flex justify-center items-center w-full h-full">
                 <div class="p-1 h-20 border">
                     <img :src="store.qr" alt="store.name" class="h-full w-auto">
                 </div>
             </div>
             <div class="absolute -bottom-8 left-0">
-                <img src="/images/stores/happy.png" :alt="store.name + ' ownder'" class="w-20 h-20 ml-5 rounded-full">
+                <img :src="storeImg" :alt="store.name + ' owner'" class="w-20 h-20 ml-5 rounded-full">
             </div>
         </div>
 
@@ -45,7 +45,9 @@
                 </div>
                 <div class="w-full">
                     <div class="overflow-hidden h-6 text-xs flex rounded progress-bar mt-2 rounded-full">
-                        <div :style="{width: funding.progress + '%'}" class="shadow-none flex flex-col whitespace-nowrap text-white justify-center bg-green rounded-full"></div>
+                        <div :style="{width: funding.progress + '%'}"
+                            class="shadow-none flex flex-col whitespace-nowrap text-white justify-center bg-green rounded-full"
+                        ></div>
                     </div>
                 </div>
             </div>
@@ -57,15 +59,19 @@
             <!-- share options -->
             <div class="grid grid-cols-2">
                 <div class="text-center">
-                    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small">
-                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore icon-facebook">
+                    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/"
+                        data-layout="button_count" data-size="small"
+                    >
+                        <a target="_blank" :href="'https://www.facebook.com/sharer/sharer.php?u=' + pageUrl"
+                            class="fb-xfbml-parse-ignore icon-facebook"
+                        >
                             <span class="inline-block w-5"></span>
                         </a>
                     </div>
                     <p>Facebook</p>
                 </div>
                 <div class="flex flex-col items-center">
-                    <p><img src="/images/wechat.png" alt=""></p>
+                    <p><img src="../../images/wechat.png" alt=""></p>
                     <p>Wechat</p>
                 </div>
             </div>
@@ -81,9 +87,10 @@
         background-image: linear-gradient(rgb(116, 191, 80) 0%, rgb(158, 59, 16) 100%);
     }
     .icon-facebook {
-        background-image: url('/images/facebook.png');
+        background-image: url('../../images/facebook.png');
         background-repeat: no-repeat;
         background-size: 13px 22px;
+        display: inline-block;
     }
     .progress-bar {
         background-color: rgba(243, 210, 193, 0.68);
@@ -97,6 +104,7 @@
         props: ['store'],
         data() {
             return {
+                pageUrl: window.location.href,
                 fundings:[
                     {name: 'Purchase a new stove', amount: 150, progress: 8},
                     {name: 'Purchase a new table', amount: 120, progress: 8},
@@ -105,14 +113,19 @@
             }
         },
         computed: {
-            styles() {
-                return this.image ? {
-                    backgroundImage: 'url(\'' + this.image + '\')'
-                } : '';
+            storeImg() {
+                return this.image ? this.image : '/images/stores/happy.png';
             }
         },
         components: {
             JetButton
         },
+        mounted() {
+            let fbScript = document.createElement('script');
+            fbScript.setAttribute('src', 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=413915962805201&autoLogAppEvents=1');
+            fbScript.setAttribute('nonce', 'l6GsBkVv');
+            fbScript.setAttribute('crossorigin', 'anonymous');
+            document.head.appendChild(fbScript);
+        }
     }
 </script>

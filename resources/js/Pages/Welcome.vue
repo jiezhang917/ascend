@@ -1,29 +1,38 @@
 <template>
     <div class="relative bg-primary min-h-screen">
         <!-- welcome page -->
-        <div class="mt-36 lg:mt-32 text-dark-slate-blue" v-if="step === 1">
+        <div class="mt-36 md:mt-52 lg:mt-32 text-dark-slate-blue" v-if="step === 1">
             <div class="grid grid-cols-12 gap-x-2 lg:gap-x-6">
                 <div class="col-span-6 col-start-4 lg:col-span-4 lg:col-start-5 flex justify-center">
-                    <svg class="logo h-auto w-full" viewBox="0 0 121 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="h-auto w-40 md:w-60 lg:w-80" viewBox="0 0 121 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2 33.6C0.895431 33.6 0 32.7046 0 31.6V2C0 0.895431 0.895431 0 2 0H4.336C5.44057 0 6.336 0.89543 6.336 2V11.536C6.336 12.6406 7.23143 13.536 8.336 13.536H19.024C20.1286 13.536 21.024 12.6406 21.024 11.536V2C21.024 0.895429 21.9194 0 23.024 0H25.36C26.4646 0 27.36 0.895431 27.36 2V31.6C27.36 32.7046 26.4646 33.6 25.36 33.6H23.024C21.9194 33.6 21.024 32.7046 21.024 31.6V21.392C21.024 20.2874 20.1286 19.392 19.024 19.392H8.336C7.23143 19.392 6.336 20.2874 6.336 21.392V31.6C6.336 32.7046 5.44057 33.6 4.336 33.6H2Z" fill="#FF6363"/>
                         <path d="M38.9306 33.6C37.8261 33.6 36.9306 32.7046 36.9306 31.6V2C36.9306 0.895431 37.8261 0 38.9306 0H58.1146C59.2192 0 60.1146 0.89543 60.1146 2V3.664C60.1146 4.76857 59.2192 5.664 58.1146 5.664H45.2666C44.1621 5.664 43.2666 6.55943 43.2666 7.664V11.392C43.2666 12.4966 44.1621 13.392 45.2666 13.392H56.7706C57.8752 13.392 58.7706 14.2874 58.7706 15.392V17.056C58.7706 18.1606 57.8752 19.056 56.7706 19.056H45.2666C44.1621 19.056 43.2666 19.9514 43.2666 21.056V25.936C43.2666 27.0406 44.1621 27.936 45.2666 27.936H58.2586C59.3632 27.936 60.2586 28.8314 60.2586 29.936V31.6C60.2586 32.7046 59.3632 33.6 58.2586 33.6H38.9306Z" fill="#FF6363"/>
                         <path d="M70.705 33.6C69.6004 33.6 68.705 32.7046 68.705 31.6V2C68.705 0.895431 69.6004 0 70.705 0H73.041C74.1456 0 75.041 0.895431 75.041 2V25.744C75.041 26.8486 75.9364 27.744 77.041 27.744H89.889C90.9936 27.744 91.889 28.6394 91.889 29.744V31.6C91.889 32.7046 90.9936 33.6 89.889 33.6H70.705Z" fill="#FF6363"/>
                         <path d="M115.878 28.8409C116.551 28.1568 117.084 27.3445 117.449 26.4504C117.813 25.5563 118 24.598 118 23.6302C118 22.6625 117.813 21.7042 117.449 20.8101C117.084 19.916 116.551 19.1037 115.878 18.4195L114.483 16.9996L115.878 15.5798C117.236 14.1978 117.999 12.3234 117.999 10.3691C117.999 8.41466 117.236 6.54031 115.878 5.15835C114.52 3.77638 112.678 3 110.758 3C108.837 3 106.995 3.77638 105.637 5.15834L104.241 6.57823L94 16.9996L104.241 27.4211L105.637 28.8409C106.309 29.5254 107.107 30.0684 107.986 30.4389C108.865 30.8093 109.806 31 110.758 31C111.709 31 112.65 30.8093 113.529 30.4389C114.408 30.0684 115.206 29.5254 115.878 28.8409V28.8409Z" stroke="#FF6363" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
-                <h1 class="col-span-12 text-xl lg:text-5xl font-bold mt-6 lg:mt-11 text-center">Welcome to HELB!</h1>
-                <p class="col-span-6 col-start-4 lg:col-span-4 lg:col-start-5 text-sm lg:text-2xl mt-2 lg:mt-2.5 text-center">We are here to help small business owners like you.</p>
+                <h1 class="col-span-12 text-xl md:text-4xl lg:text-5xl font-bold mt-6 md:mt-20 lg:mt-11 text-center">
+                    Welcome to HELB!
+                </h1>
+                <p class="col-span-6 col-start-4 md:col-span-8 md:col-start-3 lg:col-span-4 lg:col-start-5
+                    text-sm md:text-xl lg:text-2xl mt-2 mg:mt-10 lg:mt-2.5 text-center"
+                >
+                    We are here to help small business owners like you.
+                </p>
 
                 <div class="col-span-10 col-start-2 lg:col-span-6 lg:col-start-4 mt-28 lg:mt-36 text-center">
                     <jet-button @click="goNext"
-                        class="app-btn block uppercase text-white text-sm lg:text-2xl font-bold bg-orange w-full lg:h-16 rounded-xl justify-center">
+                        class="app-btn block uppercase text-white font-bold bg-orange
+                        text-sm md:text-xl lg:text-2xl
+                        w-full md:h-20 lg:h-16 rounded-xl justify-center"
+                    >
                         Get Started
                     </jet-button>
                 </div>
 
-                <div class="col-span-12 flex justify-center mt-4 lg:mt-6">
-                    <p class="text-xs lg:text-base">
-                        <span>Already have an account? </span>
+                <div class="col-span-12 flex justify-center mt-4 md:mt-5 lg:mt-6">
+                    <p class="text-xs md:text-base">
+                        <span>Already have an account?</span>
                         <inertia-link href="/login" class="underline font-bold">Login</inertia-link>
                     </p>
                 </div>
@@ -90,16 +99,10 @@
 </template>
 
 <style scoped>
-    .logo {
-        max-width: 9.75rem;
-    }
     .app-btn {
         max-width: 17rem;;
     }
-    @media (min-width: 1024px) {
-        .logo {
-            max-width: 20rem;
-        }
+    @media (min-width: 768px) {
         .app-btn {
             max-width: 31rem;;
         }
