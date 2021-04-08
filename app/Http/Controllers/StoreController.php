@@ -4,11 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Store;
 use App\Models\User;
-use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class StoreController extends Controller
 {
+    /**
+     * Show store page
+     * @param string $name
+     * @return mixed
+     */
+    public function index(string $name)
+    {
+        $store = \App\Models\Store::where('name', $name)->first();
+        if (empty($store)) {
+            abort(404, 'Store not found');
+        }
+        return Inertia::render('Store', [
+            'store' => $store
+        ]);
+    }
+
     /**
      * Create store
      */
@@ -50,10 +66,10 @@ class StoreController extends Controller
     /**
      * Get store info
      */
-    public function Get(Request $request, $name)
+    public function Get($name)
     {
         $store = Store::where('name', $name)->first();
-        
+
         return Response()->json($store);
     }
 
@@ -65,7 +81,7 @@ class StoreController extends Controller
         $file = $request->file('photos');
         $name = $file->getClientOriginalName();
         $file->move(public_path() . '/images/stores/', $name);
-        
+
         return response()->json([
             'image' => $name
         ]);

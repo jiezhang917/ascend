@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -22,16 +22,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/store/{name}', function ($name) {
-    $store = \App\Models\Store::where('name', $name)->first();
-    if (empty($store)) {
-        abort(404, 'Store not found');
-    }
-    return Inertia::render('Store', [
-        'store' => $store
-    ]);
-});
+Route::get('/store/{name}', [StoreController::class, 'index']);
 
+// Developer login page
 Route::get('/developer', function () {
     return Inertia::render('Developer', [
         'canLogin' => Route::has('login'),
@@ -40,6 +33,7 @@ Route::get('/developer', function () {
     ]);
 });
 
+// Logged in page
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');

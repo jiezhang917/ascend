@@ -1,5 +1,5 @@
 <template>
-    <div class="store-wrapper">
+    <main-layout>
         <div class="h-32 bg-no-repeat bg-cover bg-scroll relative linear-bg">
             <div class="flex justify-center items-center w-full h-full">
                 <div class="p-1 h-20 border">
@@ -76,13 +76,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main-layout>
 </template>
 
 <style scoped>
-    .store-wrapper {
-        background-color: #FEF6E4;
-    }
     .linear-bg {
         background-image: linear-gradient(rgb(116, 191, 80) 0%, rgb(158, 59, 16) 100%);
     }
@@ -98,13 +95,20 @@
 </style>
 
 <script>
+    import MainLayout from "@/Layouts/MainLayout";
     import JetButton from '@/Jetstream/Button';
 
     export default {
         props: ['store'],
+        components: {
+            MainLayout,
+            JetButton,
+        },
         data() {
             return {
                 pageUrl: window.location.href,
+                nonce: 'fake-valid-nonce',
+                formToken: document.querySelector('meta[name="csrf-token"]').content,
                 fundings:[
                     {name: 'Purchase a new stove', amount: 150, progress: 8},
                     {name: 'Purchase a new table', amount: 120, progress: 8},
@@ -117,15 +121,13 @@
                 return this.image ? this.image : '/images/stores/happy.png';
             }
         },
-        components: {
-            JetButton
-        },
         mounted() {
+            // Load facebook script
             let fbScript = document.createElement('script');
             fbScript.setAttribute('src', 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=413915962805201&autoLogAppEvents=1');
             fbScript.setAttribute('nonce', 'l6GsBkVv');
             fbScript.setAttribute('crossorigin', 'anonymous');
             document.head.appendChild(fbScript);
-        }
+        },
     }
 </script>

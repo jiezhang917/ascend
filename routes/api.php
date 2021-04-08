@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StoreController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,12 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/store/create', 'App\Http\Controllers\StoreController@Create');
+Route::post('/store/create', [StoreController::class, 'Create']);
 
-Route::post('/files/upload', 'App\Http\Controllers\StoreController@UploadFiles');
+Route::post('/files/upload', [StoreController::class, 'UploadFiles']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    // Get user profile
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+    // Get store profile
+    Route::get('/store/{name}', [StoreController::class, 'Get']);
 });
-
-Route::middleware('auth:sanctum')->get('/store/{name}', 'App\Http\Controllers\StoreController@Get');

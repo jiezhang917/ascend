@@ -16,12 +16,3 @@
     font-family: BasisGrotesquePro-Light;
     src: url('./font/BasisGrotesquePro-Light.ttf');
 }
-
-.app-wrapper {
-    background-color: #fef6e4;
-}
-
-.app {
-    max-width: 1080px;
-    margin: 0 auto;
-}
