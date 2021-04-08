@@ -21,6 +21,14 @@
             <h2 class="text-base font-bold mb-4">Support the business</h2>
 
             <div class="grid grid-cols-2 gap-2.5">
+                <div class="col-span-2">
+                    <form id="checkout" method="post" action="/checkout" class="col-span-2">
+                        <input type="hidden" name="_token" :value="formToken">
+                        <div id="payment-form"></div>
+                        <input id="nonce" name="payment_method_nonce" type="hidden" :value="nonce" />
+                        <jet-button>Pay $1</jet-button>
+                    </form>
+                </div>
                 <jet-button class="bg-green font-bold text-sm justify-center col-span-2">
                     BUY GIFT CARD
                 </jet-button>
@@ -98,6 +106,8 @@
     import MainLayout from "@/Layouts/MainLayout";
     import JetButton from '@/Jetstream/Button';
 
+    window.dropin = require('braintree-web-drop-in');
+
     export default {
         props: ['store'],
         components: {
@@ -128,6 +138,44 @@
             fbScript.setAttribute('nonce', 'l6GsBkVv');
             fbScript.setAttribute('crossorigin', 'anonymous');
             document.head.appendChild(fbScript);
+
+            // Set up braintree
+            this.setupBraintree();
         },
+        methods: {
+            setupBraintree() {
+                axios.get('/api/token/get')
+                .then((response) => {
+                    if (response.data.token) {
+                        this.setupPaymentMethods(response.data.token);
+                    }
+                });
+            },
+            setupPaymentMethods(token) {
+                const self = this;
+                dropin.create({
+                    authorization: token,
+                    selector: "#payment-form",
+                    paypal: {
+                        flow: 'vault'
+                    },
+                    venmo: {}
+                }, function (createErr, instance) {
+                    if (createErr) {
+                        console.log('Create Error', createErr);
+                        return;
+                    }
+                    // instance.requestPaymentMethod(function (err, payload) {
+                    //     if (err) {
+                    //         console.log('Request Payment Method Error', err);
+                    //         return;
+                    //     }
+                    //
+                    //     // Add the nonce to the form and submit
+                    //     self.nonce = payload.nonce;
+                    // });
+                });
+            }
+        }
     }
 </script>

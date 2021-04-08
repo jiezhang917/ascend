@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,6 +24,8 @@ Route::get('/', function () {
 });
 
 Route::get('/store/{name}', [StoreController::class, 'index']);
+
+Route::post('/checkout', [PaymentController::class, 'checkout']);
 
 // Developer login page
 Route::get('/developer', function () {

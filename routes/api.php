@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('/store/create', [StoreController::class, 'Create']);
 
 Route::post('/files/upload', [StoreController::class, 'UploadFiles']);
+
+Route::get('/token/get', [PaymentController::class, 'generateToken']);
 
 Route::middleware('auth:sanctum')->group(function () {
     // Get user profile
