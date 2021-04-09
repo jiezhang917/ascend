@@ -1,7 +1,7 @@
 <template>
-    <div class="relative bg-primary min-h-screen">
+    <main-layout>
         <!-- welcome page -->
-        <div class="mt-36 md:mt-52 lg:mt-32 text-dark-slate-blue" v-if="step === 1">
+        <div class="pt-36 md:pt-52 lg:pt-32 text-dark-slate-blue" v-if="step === 1">
             <div class="grid grid-cols-12 gap-x-2 lg:gap-x-6">
                 <div class="col-span-6 col-start-4 lg:col-span-4 lg:col-start-5 flex justify-center">
                     <svg class="h-auto w-40 md:w-60 lg:w-80" viewBox="0 0 121 34" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -15,16 +15,14 @@
                     Welcome to HELB!
                 </h1>
                 <p class="col-span-6 col-start-4 md:col-span-8 md:col-start-3 lg:col-span-4 lg:col-start-5
-                    text-sm md:text-xl lg:text-2xl mt-2 mg:mt-10 lg:mt-2.5 text-center"
+                    text-sm md:text-xl lg:text-2xl mt-2 md:mt-10 lg:mt-2.5 text-center"
                 >
                     We are here to help small business owners like you.
                 </p>
 
                 <div class="col-span-10 col-start-2 lg:col-span-6 lg:col-start-4 mt-28 lg:mt-36 text-center">
                     <jet-button @click="goNext"
-                        class="app-btn block uppercase text-white font-bold bg-orange
-                        text-sm md:text-xl lg:text-2xl
-                        w-full md:h-20 lg:h-16 rounded-xl justify-center"
+                        class="app-btn uppercase text-white font-bold bg-orange text-sm md:text-xl lg:text-2xl w-full md:h-20 lg:h-16 rounded-lg justify-center"
                     >
                         Get Started
                     </jet-button>
@@ -32,7 +30,7 @@
 
                 <div class="col-span-12 flex justify-center mt-4 md:mt-5 lg:mt-6">
                     <p class="text-xs md:text-base">
-                        <span>Already have an account?</span>
+                        <span>Already have an account?&nbsp;</span>
                         <inertia-link href="/login" class="underline font-bold">Login</inertia-link>
                     </p>
                 </div>
@@ -95,21 +93,22 @@
         </div>
 
         <info-modal v-if="showModal" @close="showModal = false"/>
-    </div>
+    </main-layout>
 </template>
 
 <style scoped>
     .app-btn {
-        max-width: 17rem;;
+        max-width: 20rem;
     }
     @media (min-width: 768px) {
         .app-btn {
-            max-width: 31rem;;
+            max-width: 31rem;
         }
     }
 </style>
 
 <script>
+    import MainLayout from "@/Layouts/MainLayout";
     import JetInput from '@/Jetstream/Input'
     import JetButton from '@/Jetstream/Button';
     import GeneralInfo from '../Components/GeneralInfo';
@@ -122,6 +121,16 @@
         props: {
             canLogin: Boolean,
             canRegister: Boolean,
+        },
+        components: {
+            MainLayout,
+            JetInput,
+            JetButton,
+            GeneralInfo,
+            SelectTheme,
+            AddDonation,
+            FinalStep,
+            InfoModal,
         },
         data() {
             return {
@@ -147,15 +156,6 @@
             progressStyle() {
                 return 'width: ' + (this.step -1) * 25 + '%';
             }
-        },
-        components: {
-            JetInput,
-            JetButton,
-            GeneralInfo,
-            SelectTheme,
-            AddDonation,
-            FinalStep,
-            InfoModal,
         },
         methods: {
             goPrev() {
