@@ -27,3 +27,6 @@ The API endpoints in this repo are protected by sanctum. To request them, follow
 2. Click on your profile icon and then click on API Tokens.
 3. Here you can create your API tokens by giving it a name
 and specifying permissions for it.
+
+# Misc
+[CouponDuos](https://www.couponduos.com/): CouponDuos is a great website created by a group of passionate people, which helps you achieve your dream lifestyle with affordable price.
