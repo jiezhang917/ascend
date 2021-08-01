@@ -1,37 +1,32 @@
-## Welcome to GitHub Pages
+# Setup locally
+_This repo relies on docker containers, please make sure you
+have docker running_
 
-You can use the [editor on GitHub](https://github.com/jiezhang917/ascend/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+### Depends on
+* PHP >7.3
+* composer
+* nodejs
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Images being used:
+* mariadb:latest
+* redis:alpine
 
-### Markdown
+### Bring it up
+1. Install php dependencies: `composer install`
+2. Run: `./vendor/bin/sail up`
+3. Install javascript dependencies: `npm install`
+4. Compile css and js: `npm run prod`
+5. Open your browser: http://localhost
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+_Notes: In case you don't have required dependencies installed in your local environment, like node, php, etc, you can use the containers to run those commands from step 2._
 
-```markdown
-Syntax highlighted code block
+# Call APIs
+The API endpoints in this repo are protected by sanctum. To request them, follow these steps:
+1. Register a user account if you don't have one yet: 
+[Register](/register)
+2. Click on your profile icon and then click on API Tokens.
+3. Here you can create your API tokens by giving it a name
+and specifying permissions for it.
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/jiezhang917/ascend/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+# Misc
+[CouponDuos](https://www.couponduos.com/): CouponDuos is a great website created by a group of passionate people, which helps you achieve your dream lifestyle with affordable price.
